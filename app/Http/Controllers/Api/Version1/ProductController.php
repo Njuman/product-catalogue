@@ -32,7 +32,10 @@ class ProductController extends Controller
     public function postProducts(ProductRequest $productRequest)
     {
         try {
-            $product = Product::create($productRequest->toArray());
+            $productRequest = $productRequest->all();
+            $productRequest['created_by'] = 3;
+            $productRequest['image'] = 'https://via.placeholder.com/150/000000/FFFFFF/?text=IPaddress.net';
+            $product = Product::create($productRequest);
             return response()->json($product->toArray());
         } catch (BadRequestException $e) {
             throw new HttpResponseException(response()->json($e->toArray(), $e->getCode()));

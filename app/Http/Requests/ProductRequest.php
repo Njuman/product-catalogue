@@ -15,8 +15,7 @@ class ProductRequest extends ApiRequest
             'description' => '',
             'price' => '',
             'image' => '',
-            'category' => '',
-            'created_by' => ''
+            'category' => ''
         ];
     }
 }

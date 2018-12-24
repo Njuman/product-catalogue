@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="app">
-        <product-catalogue></product-catalogue>
+        <admin></admin>
     </div>
     <script type="text/javascript" src="js/app.js"></script>
 </body>
