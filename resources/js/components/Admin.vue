@@ -144,7 +144,7 @@
         padding: 10px 10px;
         display: block;
         width: 100%;
-        height: 30px;
+        height: 47px;
         border: solid 3px #ccc;
         -webkit-border-radius: 2px;
         -moz-border-radius: 2px;

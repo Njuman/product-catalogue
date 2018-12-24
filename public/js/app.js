@@ -5911,7 +5911,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody, html {\n    padding: 0;\n    margin: 0;\n    outline: 0;\n    font-family: arial;\n}\n.container {\n    width: 550px;\n    margin: 45px auto;\n}\n.clearfix {\n    clear: both;\n}\n.form-part {\n    margin: 20px 0;\n}\n.form-part label {\n    font-size: 25px;\n    font-weight: 400;\n    font-family: 'Josefin Sans', sans-serif;\n    margin-bottom: 15px;\n}\n.text-input,\n.radio-button,\n.check-boxes {\n    margin-bottom: 13px;\n}\nlabel {\n    display: block;\n    margin-bottom: 3px;\n    font-family: 'Josefin Sans', sans-serif;\n    font-size: 14px;\n    font-weight: 600;\n    margin-bottom: 7px;\n    font-weight: 900;\n}\ninput,\nselect {\n    padding: 10px 10px;\n    display: block;\n    width: 100%;\n    height: 30px;\n    border: solid 3px #ccc;\n    border-radius: 2px;\n}\n\n", ""]);
+exports.push([module.i, "\nbody, html {\n    padding: 0;\n    margin: 0;\n    outline: 0;\n    font-family: arial;\n}\n.container {\n    width: 550px;\n    margin: 45px auto;\n}\n.clearfix {\n    clear: both;\n}\n.form-part {\n    margin: 20px 0;\n}\n.form-part label {\n    font-size: 25px;\n    font-weight: 400;\n    font-family: 'Josefin Sans', sans-serif;\n    margin-bottom: 15px;\n}\n.text-input,\n.radio-button,\n.check-boxes {\n    margin-bottom: 13px;\n}\nlabel {\n    display: block;\n    margin-bottom: 3px;\n    font-family: 'Josefin Sans', sans-serif;\n    font-size: 14px;\n    font-weight: 600;\n    margin-bottom: 7px;\n    font-weight: 900;\n}\ninput,\nselect {\n    padding: 10px 10px;\n    display: block;\n    width: 100%;\n    height: 47px;\n    border: solid 3px #ccc;\n    border-radius: 2px;\n}\n\n", ""]);
 
 // exports
 
