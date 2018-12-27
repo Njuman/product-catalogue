@@ -28,3 +28,7 @@ DB_PASSWORD={password}
 - Run migrations `php artisan migrate`
 - Run node server `npm run watch`
 - Run app `php artisan serve`
+
+#### Open app
+- [localhost:8000](localhost:8000) here i'm using localhost because of cors same domain policy which i couldn't fix in this project.
+- admin area [localhost:8000/admin](localhost:8000/admin)
