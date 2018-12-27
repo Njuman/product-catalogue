@@ -12,7 +12,7 @@
                 <img :src="product.image" :alt="product.name" style="width:100%">
                 <div class="details">
                     <h2>{{product.title}}</h2>
-                    <p class="price">{{product.price}}</p>
+                    <p class="price">R{{product.price}}</p>
                     <p>{{product.description}}</p>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             fetchProducts() {
                 let self = this
                 return axios({
-                    url: 'http://127.0.0.1:8000/api/v1/products',
+                    url: 'http://localhost:8000/api/v1/products',
                     method: 'get',
                 }).then(results => {
                     console.log('results', results)
@@ -56,7 +56,7 @@
             fetchCategories() {
                 let self = this
                 axios({
-                    url: 'http://127.0.0.1:8000/api/v1/categories',
+                    url: 'http://localhost:8000/api/v1/categories',
                     method: 'get',
                 }).then(results => {
                     self.categories = results.data || []

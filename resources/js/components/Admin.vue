@@ -23,6 +23,10 @@
                 <input type="number" min="1" step="any" name="price" id="price" v-model="price">
             </div>
             <div class="form-part">
+                <label for="price">Image</label>
+                <input type="file" name="pic" accept="image/*" id="image-upload">
+            </div>
+            <div class="form-part">
                 <input type="submit">
             </div>
         </form>
@@ -48,7 +52,7 @@
             fetchCategories() {
                 let self = this
                 axios({
-                    url: 'http://127.0.0.1:8000/api/v1/categories',
+                    url: 'http://localhost:8000/api/v1/categories',
                     method: 'get',
                 }).then(results => {
                     self.categories = results.data || []
@@ -74,21 +78,34 @@
             },
             submitForm () {
                 axios({
-                    url: 'http://127.0.0.1:8000/api/v1/products',
+                    url: 'http://localhost:8000/api/v1/products/upload',
                     method: 'post',
-                    data: {
-                        title: this.title,
-                        description: this.description,
-                        price: this.price,
-                        category: this.category,
-                    }
-                }).then(() => {
-                    // redirect to product list
-                    window.location.href = 'http://127.0.0.1:8000'
-                }).catch(err => {
-                    this.error = "there was an error"
-                    console.log('Error:',err)
+                    data: this.getImage()
+                }).then(results => {
+                    axios({
+                        url: 'http://localhost:8000/api/v1/products',
+                        method: 'post',
+                        data: {
+                            title: this.title,
+                            description: this.description,
+                            price: this.price,
+                            category: this.category,
+                            image: results.data.url
+                        }
+                    }).then(() => {
+                        // redirect to product list
+                        window.location.href = 'http://localhost:8000'
+                    }).catch(err => {
+                        this.error = "there was an error";
+                        console.log('Error:',err)
+                    })
                 })
+            },
+            getImage () {
+                let formData = new FormData();
+                formData.append( 'product_image', document.querySelector( '#image-upload' ).files[0] );
+
+                return formData;
             }
         }
     }

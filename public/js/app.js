@@ -1794,6 +1794,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1812,7 +1816,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchCategories: function fetchCategories() {
       var self = this;
       axios({
-        url: 'http://127.0.0.1:8000/api/v1/categories',
+        url: 'http://localhost:8000/api/v1/categories',
         method: 'get'
       }).then(function (results) {
         self.categories = results.data || [];
@@ -1835,21 +1839,33 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios({
-        url: 'http://127.0.0.1:8000/api/v1/products',
+        url: 'http://localhost:8000/api/v1/products/upload',
         method: 'post',
-        data: {
-          title: this.title,
-          description: this.description,
-          price: this.price,
-          category: this.category
-        }
-      }).then(function () {
-        // redirect to product list
-        window.location.href = 'http://127.0.0.1:8000';
-      }).catch(function (err) {
-        _this.error = "there was an error";
-        console.log('Error:', err);
+        data: this.getImage()
+      }).then(function (results) {
+        axios({
+          url: 'http://localhost:8000/api/v1/products',
+          method: 'post',
+          data: {
+            title: _this.title,
+            description: _this.description,
+            price: _this.price,
+            category: _this.category,
+            image: results.data.url
+          }
+        }).then(function () {
+          // redirect to product list
+          window.location.href = 'http://localhost:8000';
+        }).catch(function (err) {
+          _this.error = "there was an error";
+          console.log('Error:', err);
+        });
       });
+    },
+    getImage: function getImage() {
+      var formData = new FormData();
+      formData.append('product_image', document.querySelector('#image-upload').files[0]);
+      return formData;
     }
   }
 });
@@ -1917,7 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchProducts: function fetchProducts() {
       var self = this;
       return axios({
-        url: 'http://127.0.0.1:8000/api/v1/products',
+        url: 'http://localhost:8000/api/v1/products',
         method: 'get'
       }).then(function (results) {
         console.log('results', results);
@@ -1927,7 +1943,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchCategories: function fetchCategories() {
       var self = this;
       axios({
-        url: 'http://127.0.0.1:8000/api/v1/categories',
+        url: 'http://localhost:8000/api/v1/categories',
         method: 'get'
       }).then(function (results) {
         self.categories = results.data || [];
@@ -37308,11 +37324,30 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1)
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-part" }, [
+      _c("label", { attrs: { for: "price" } }, [_vm._v("Image")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "file",
+          name: "pic",
+          accept: "image/*",
+          id: "image-upload"
+        }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37406,7 +37441,9 @@ var render = function() {
           _c("div", { staticClass: "details" }, [
             _c("h2", [_vm._v(_vm._s(product.title))]),
             _vm._v(" "),
-            _c("p", { staticClass: "price" }, [_vm._v(_vm._s(product.price))]),
+            _c("p", { staticClass: "price" }, [
+              _vm._v("R" + _vm._s(product.price))
+            ]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(product.description))])
           ])

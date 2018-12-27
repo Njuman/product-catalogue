@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Products;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductController extends Controller
 {
@@ -33,8 +35,7 @@ class ProductController extends Controller
     {
         try {
             $productRequest = $productRequest->all();
-            $productRequest['created_by'] = 3;
-            $productRequest['image'] = 'https://via.placeholder.com/150/000000/FFFFFF/?text=IPaddress.net';
+            $productRequest['created_by'] = 1;
             $product = Product::create($productRequest);
             return response()->json($product->toArray());
         } catch (BadRequestException $e) {
@@ -66,6 +67,25 @@ class ProductController extends Controller
             return response()->json($product->toArray());
         } catch (BadRequestException $e) {
             throw new HttpResponseException(response()->json($e->toArray(), $e->getCode()));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadImage(Request $request) {
+        if($request->hasfile('product_image'))
+        {
+            $image = $request->file('product_image');
+            $extension = $image->getClientOriginalExtension(); // getting image extension
+            $filename = time().'.'.$extension;
+
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(240, 300);
+            $image_resize->save(public_path('uploads/products/' .$filename));
+
+            return response()->json(['url' => url('uploads/products/'.$filename)]);
         }
     }
 }

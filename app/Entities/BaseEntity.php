@@ -163,8 +163,8 @@ class BaseEntity
             $obj = new static($data); /** @var $obj BaseEntity */
             $obj->save();
             return $obj;
-        } catch (Exception $e) {
-            throw new BadRequestException();
+        } catch (BadRequestException $e) {
+            throw $e;
         }
     }
 
@@ -178,14 +178,14 @@ class BaseEntity
             $this->setAttributes($data);
             $this->save();
             return $this;
-        } catch (Exception $e) {
-            throw new BadRequestException();
+        } catch (BadRequestException $e) {
+            throw $e;
         }
     }
 
     /**
      * @return $this
-     * @throws Exception
+     * @throws BadRequestException
      */
     public function save()
     {
@@ -202,7 +202,7 @@ class BaseEntity
             }
             DB::connection()->commit();
             return $this;
-        } catch (Exception $e) {
+        } catch (BadRequestException $e) {
             DB::connection()->rollBack();
             throw $e;
         }
